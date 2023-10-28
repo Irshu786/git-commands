@@ -1,0 +1,170 @@
+=== GIT LEARNING FOR FUTURE USE ===
+
+*IMP*
+Creating the access token is very much required, after 2021, github changed the authentication, to create a access token:
+Follow the below steps:
+
+1) Right click on the profile, select on the profile settings and at the left last side click on developer settinsg
+2) Create a access token and then use that as password of your account
+
+
+One observation: 
+
+
+1) We have our code deployed in the prod branch and u are working on the prod branch itself but lets say some person changes the values, so now ur local has 2 changes in the same file and the remote has the same change, then when u do a git pull u will get the below error:
+
+Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result
+
+So, for this to happen, push your code to a new prod-new branch and raise a merge request to prod, resolve the conflicts and then create a merge request to prod, and all your code will be now available in the prod branch and when u do a git pull, it will fetch properly and tell us the status
+
+==========  GIT DOCUMENTATION ===============
+ 
+-> ROM LOCAL SYSTEM TO GIT ( ROLE : OWNER )
+
+1) CLONING INTO LOCAL ( EVEN IF YOU ARE DEVELOPER/OWNER ) CLONING WILL BE DONE.
+   command: git clone https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+   
+A) If you want to Clone a Branch
+   git clone  --branch prod https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+
+2) PULLING THE REPO ( EVEN IF YOU ARE DEVELOPER/OWNER ) PULLING WILL BE DONE
+NOTE: Before pulling the Repo, first git initialize into folder
+   command: git init
+   command: git clone https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+   
+A) Pulling the Repo from a specific branch
+   command: git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git prod
+
+
+== PUSHING STARTS FROM HERE ==
+
+3) PUSHING INTO GIT ( MASTER )
+
+A. IF YOU ARE OWNER 
+===================
+ 
+If we directly push into master, cmd: git push -u origin master
+Error: fatal: 'origin' does not appear to be a git repository, fatal: Could not read from remote repository.Please make sure you have the correct access rights, and the repository exists.
+
+CASE-A: You have changed the file/files, then pushing into git
+
+1) git init
+2) git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+3) git add .
+4) git commit -m "adding files/changing some files" 
+5) git remote add origin https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+6) git push -u origin master
+
+CASE-B: You havent changed the file/files, then pushing into git
+
+( As you do the steps from 1 TO 6 above, everything will work fine and the commit added here will not be shown in git )
+RESPONSE: Branch 'master' set up to track remote branch 'master' from 'origin'.Everything up-to-date
+
+
+
+4) PUSHING INTO GIT ( BRANCH )
+
+If we directly push into branch also, cmd: git push -u origin branch
+Error: fatal: 'origin' does not appear to be a git repository, fatal: Could not read from remote repository.Please make sure you have the correct access rights, and the repository exists.
+
+1) git init
+2) git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+3) git add .
+4) git commit -m "some_text" 
+5) git remote add origin https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+[ Push we can do it directly having current branch or we can create by (git checkout -b <branch_name>) ]
+6) git push -u origin <branch_name> 
+
+
+
+
+
+B. IF YOU ARE DEVELOPER 
+=======================
+
+
+I) We cant directly push into master, if we are developer, for that we have create a merge request, as by creating a brach in that folder. 
+A) Create a merge request:
+[ This is a good method to add a new branch and ask for merge request ]
+1) git init
+2) git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+3) Change anything
+4) git add .
+5) git commit -m "Text Anything"
+6) git remote add origin https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+7) git checkout -b <branch_name>
+8) git push origin <branch_name>
+9) Go to Gitlab UI, Go to the branch which we have given and click on create merge request, after then fill all the details as shown below. 
+10) Maintainer, Owner will check the code and merge the branch into the master. 
+
+
+II) Pulling and pushing into the branch
+
+1) git init
+2) git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git dev-1 
+3) Change anything
+4) git add .
+5) git commit -m "Text Anything"
+6) git remote add origin https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+7) git checkout -b <branch_name>
+8) git push origin <branch_name>
+
+
+==================================================================================== 1. FROM SERVER TO GIT ====================================================================================
+
+[ Create an Access Token, so that you dont have to authenticate everytime ]
+
+1) CLONING
+A) OWNER
+git clone https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+- Here authentication is required, give username and password as access_token
+B) DEVELOPER 
+git clone https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+- Here authentication is required, give username and password as access_token
+
+[ OWNER, DEVELOPER AND MAINTAINER CAN CLONE THE REPO INTO LOCAL FOLDER ]
+
+2) PULLING
+A) OWNER/MAINTAINER 
+-  git init 
+-  git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+
+B) DEVELOPER 
+-  git init 
+-  git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+[ OWNER, DEVELOPER AND MAINTAINER CAN CLONE THE REPO INTO LOCAL FOLDER ]
+
+3) PUSHING
+A) OWNER CAN DIRECTLY PUSH INTO MASTER
+- Before pushing, pull the latest version of copy and change anything you require.
+
+1) git init
+2) git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+3) git add .
+4) git commit -m "Any Suitable Text"
+5) git remote add origin https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+6) git push -u origin master 
+
+B) MAINTAINER, DEVELOPER CANT PUSH INTO MASTER, HAVE TO CREATE A BRANCH AND PUSH INTO BRANCH AND THEN CREATE A MERGE REQUEST TO MERGE THE CODE INTO MASTER
+
+1) git init
+2) git pull https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+3) git add .
+4) git commit -m "Text Anything"
+5) git remote add origin https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+6) git checkout -b <branch_name>
+7) git push origin <branch_name>
+
+
+
+--
+
+Even after merge conflicts are resolved, if u cant go to the main branch, use force and then pull again
+
+git checkout main --force
+
+#git clone https://oauth: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@github.com/Irshu786/devops-cmu-project.git
+
+
